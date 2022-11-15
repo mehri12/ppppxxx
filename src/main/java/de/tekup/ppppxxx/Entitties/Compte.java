@@ -13,6 +13,7 @@ public class Compte {
     private long numCompte;
     private  String nomCompte;
     @JsonIgnore
-    @OneToOne(mappedBy = "compte")
+    @OneToOne(cascade = CascadeType.ALL)
     private Employee employee;
+
 }

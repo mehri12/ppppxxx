@@ -30,7 +30,7 @@ public class Employee {
     @JsonIgnore
     @OneToMany(mappedBy ="employee",fetch = FetchType.LAZY)
     private List<Projet> projets;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne( mappedBy = "employee",cascade = CascadeType.ALL)
     private Compte compte;
 
     public Employee(Long employee_id, String firstname, String lastname, String password, String email) {

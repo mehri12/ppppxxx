@@ -6,7 +6,9 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.tekup.ppppxxx.Entitties.Employee;
+import de.tekup.ppppxxx.Entitties.Projet;
 import de.tekup.ppppxxx.Entitties.Role;
+import de.tekup.ppppxxx.Entitties.Tache;
 import de.tekup.ppppxxx.Repositories.Employeerepo;
 import de.tekup.ppppxxx.Services.EmployeeService;
 import lombok.Data;
@@ -37,6 +39,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
+    private Employeerepo employeerepo;
     @PostMapping("/employee/save")
     public ResponseEntity<Employee> saveemployee(@RequestBody Employee employee){
         return ResponseEntity.ok().body(employeeService.saveemployee(employee));
@@ -51,10 +54,12 @@ public class EmployeeController {
         employeeService.addroletoemployee(form.getUsername(), form.getRolename());
         return ResponseEntity.ok().build();
     }
+
+
     @PostMapping()
     public Employee createemployee(@RequestBody Employee employee){
 
-        return employeeService.saveemployee(employee);
+        return employeerepo.save(employee);
     }
     // get employee with id
     @GetMapping("{id}")
